@@ -7,12 +7,12 @@ const App = () => {
   const handleVote = (anecdote) => {
     console.log("vote");
   };
-  const baseUrl = "http://localhost:3001";
+  const baseUrl = "http://localhost:3001/anecdotes";
 
   const result = useQuery({
     queryKey: ["anecdotes"],
     queryFn: () =>
-      axios.get(`${baseUrl}/anecdotes`).then((result) => result.data),
+      axios.get(baseUrl).then((result) => result.data),
     retry: 1,
   });
 
