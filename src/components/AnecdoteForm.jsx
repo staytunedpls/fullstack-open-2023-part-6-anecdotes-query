@@ -13,6 +13,13 @@ const AnecdoteForm = () => {
   const postAnecdoteMutation = useMutation({
     mutationFn: postAnecdote,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["anecdotes"] }),
+    onError: (err) => {
+      dispatchNotification({
+        type: "ERROR",
+        payload: err.response.data.error,
+      });
+      setTimeout(() => dispatchNotification({ type: "CLEAR" }), 5000);
+    },
   });
   const onCreate = (event) => {
     event.preventDefault();

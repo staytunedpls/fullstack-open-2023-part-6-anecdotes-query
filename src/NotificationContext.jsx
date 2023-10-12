@@ -8,12 +8,14 @@ const notificationReducer = (state, action) => {
       return `anecdote "${action.payload}" created`;
     case "CLEAR":
       return "";
+    case "ERROR":
+      return action.payload;
     default:
       return state;
   }
 };
 
-const NotificationContext = createContext()
+const NotificationContext = createContext();
 
 export const NotificationContextProvider = (props) => {
   const [notification, dispatchNotification] = useReducer(
@@ -24,7 +26,7 @@ export const NotificationContextProvider = (props) => {
     <NotificationContext.Provider value={[notification, dispatchNotification]}>
       {props.children}
     </NotificationContext.Provider>
-  )
+  );
 };
 
-export default NotificationContext
+export default NotificationContext;
